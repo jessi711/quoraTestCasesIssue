@@ -16,7 +16,8 @@ import java.util.Date;
 @Table(name = "QUESTION")
 
 @NamedQueries({
-        @NamedQuery(name = "allQuestions", query = "select q from Question q")
+        @NamedQuery(name = "allQuestions", query = "select q from Question q"),
+        @NamedQuery(name = "questionById", query = "select q from Question q where q.uuid = :uuid")
 })
 
 public class QuestionEntity implements Serializable {
@@ -37,12 +38,11 @@ public class QuestionEntity implements Serializable {
 
     @Column(name = "Date")
     @NotNull
-    @Size(max = 200)
     private ZonedDateTime date;
 
 
     @ManyToOne
-    @JoinColumn(name = "USERID")
+    @JoinColumn(name = "USER_ID")
     private UserEntity user;
 
     public long getId() {
